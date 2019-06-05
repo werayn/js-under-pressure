@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Express api dedicated to js-under-pressure client",
+  "main": "index.js",
+  "repository": "git@github.com:werayn/js-under-pressure.git",
+  "author": "Junique Virgile",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn lint && nodemon --exec babel-node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/eslint/bin/eslint.js \"src/**/*.js*\" --fix"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-jest": "^22.6.4",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.12"
+  }
+}
