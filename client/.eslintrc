@@ -7,6 +7,11 @@
     "jest": true,
     "browser": true
   },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
   "plugins": [
     "react",
     "jest"
@@ -51,7 +56,6 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:eslint-comments/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -190,14 +194,6 @@
     "no-process-exit": 0, // disallow process.exit() (on by default in the node environment)
     "no-restricted-modules": 1, // restrict usage of specified node modules (off by default)
     "no-sync": 0, // disallow use of synchronous methods (off by default)
-    // ESLint Comments Plugin
-    // The following rules are made available via `eslint-plugin-eslint-comments`
-    "eslint-comments/no-aggregating-enable": 1, // disallows eslint-enable comments for multiple eslint-disable comments
-    "eslint-comments/no-unlimited-disable": 1, // disallows eslint-disable comments without rule names
-    "eslint-comments/no-unused-disable": 1, // disallow disables that don't cover any errors
-    "eslint-comments/no-unused-enable": 1, // // disallow enables that don't enable anything or enable rules that weren't disabled
-    // Stylistic Issues
-    // These rules are purely matters of style and are quite subjective.
     "key-spacing": 0,
     "keyword-spacing": 1, // enforce spacing before and after keywords
     "jsx-quotes": [

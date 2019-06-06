@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const levelSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        default: uuid.v1
+    },
     name: {
         type: String,
         unique: true,
