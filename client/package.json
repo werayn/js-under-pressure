@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel-node ./node_modules/webpack/bin/webpack --mode production",
-    "start:dev": "babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development --open",
+    "build": "yarn lint && babel-node ./node_modules/webpack/bin/webpack --mode production",
+    "start:dev": "yarn lint && babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development --open",
     "lint": "babel-node ./node_modules/eslint/bin/eslint.js \"src/**/*.js\" \"src/**/*.jsx\" --fix"
   },
   "devDependencies": {
@@ -38,6 +38,9 @@
     "webpack-dev-server": "^3.6.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.0.2",
+    "@material-ui/icons": "^4.0.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }

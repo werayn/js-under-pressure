@@ -1,6 +1,33 @@
+html, body, .grid-container { height: 100%; margin: 0; }
+
 body {
-    div#root{
-      background-color: #dedfe0;
-      color: #ff9c39;
-    }
-  }
+    background: green;
+}
+
+.grid-container * {
+ position: relative;
+}
+
+.grid-container *:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.3fr 0.7fr;
+  grid-template-areas: "editor" "log";
+}
+
+.editor {
+    grid-area: editor;
+    border: 1px solid red;
+}
+
+.log {
+    grid-area: log;
+    border: 1px solid red;
+}
+
