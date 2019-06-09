@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from 'containers/app.jsx';
+import { AppStore } from 'mobx/index.jsx';
 
+const store = new AppStore();
 /**
  * DOM component - setup main component into root div
  * @reactProps {none} none - none
@@ -13,6 +15,6 @@ import { App } from 'containers/app.jsx';
  */
 /*eslint react/jsx-filename-extension: 0*/
 ReactDOM.render((
-    <App />
+    <App store={ store } />
 ),
 document.getElementById('root'));

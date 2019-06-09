@@ -1,14 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import { Welcome } from './welcome/index.jsx';
 import { Editor } from './editor/index.jsx';
 
+@inject('AppStore')
 class MainEditor extends React.Component {
-    static propTypes = {
-        start: PropTypes.isBoolean.isRequired,
-        skip: PropTypes.isBoolean.isRequired,
-        level: PropTypes.isNumber.isRequired,
-    }
 
     constructor(props) {
         super(props);
