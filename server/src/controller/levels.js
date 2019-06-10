@@ -4,6 +4,7 @@ import {
     LevelNotFound,
     LevelsNotFound,
 } from '../exceptions/levelNotFound.js';
+import { TestNotFound } from '../exceptions/testNotFound.js';
 
 class LevelsController {
     constructor() {
@@ -38,14 +39,20 @@ class LevelsController {
             });
     }
 
-    getTest() {
-        console.log('lol');
+    getTest(req, res, next) {
+        const id = req.params.id;
+        models.Level.findById(id)
+            .then((level) => {
+                (level.test) ?
+                    res.send(level.test) :
+                    next(new TestNotFound(id));
+            });
     }
 
 
     deleteLevel(req, res, next) {
         const id = req.params.id;
-        this.modelsLevel.findByIdAndDelete(id)
+        models.Level.findByIdAndDelete(id)
             .then((successResponse) => {
                 (successResponse) ?
                     res.send(200) :

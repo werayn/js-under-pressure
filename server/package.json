@@ -7,6 +7,7 @@
   "author": "Junique Virgile",
   "license": "MIT",
   "scripts": {
+    "seed": "nodemon --exec babel-node src/seed.js",
     "start": "yarn lint && nodemon --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "babel-node ./node_modules/eslint/bin/eslint.js \"src/**/*.js*\" --fix"
@@ -25,6 +26,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "lodash": "^4.17.11",
     "mongoose": "^5.5.12",
     "uuid": "^3.3.2"
   }

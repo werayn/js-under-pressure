@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
-import uuid from 'uuid';
+import { testSchema } from './tests.js';
 
 const levelSchema = new mongoose.Schema({
-    id:{
-        type: String,
-        unique: true,
-        default: uuid.v1,
-    },
+
     name: {
         type: String,
         unique: true,
@@ -15,8 +11,7 @@ const levelSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
+    test : testSchema,
 });
 
-const Level = mongoose.model('Level', levelSchema);
-
-export { Level };
+export { levelSchema };

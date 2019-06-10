@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const testSchema = new mongoose.Schema({
-    arguments: {
+    argument: {
         type: Array,
         unique: true,
     },
@@ -11,6 +11,4 @@ const testSchema = new mongoose.Schema({
     },
 });
 
-const Test = mongoose.model('Test', testSchema);
-
-export { Test };
+export { testSchema };

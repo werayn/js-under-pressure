@@ -1,0 +1,76 @@
+[
+    {
+        'argument': [
+            {
+                'x': 2,
+                'x2': 4,
+            },
+        ],
+        'expectedResult': [
+            {
+                'y': 6,
+                'y2': 12,
+            },
+        ],
+    },
+    {
+        'argument': [
+            { 'x': 2 },
+            { 'x2': 4 },
+        ],
+        'expectedResult': [
+            { 'y': 6 },
+            { 'y2': 12 },
+        ],
+    },
+    {
+        'argument': [
+            { 'x': 2 },
+            { 'x2': 4 },
+        ],
+        'expectedResult': [
+            { 'y': 6 },
+            { 'y2': 12 },
+        ],
+    },
+    {
+        'argument': [
+            { 'x': 2 },
+            { 'x2': 4 },
+        ],
+        'expectedResult': [
+            { 'y': 6 },
+            { 'y2': 12 },
+        ],
+    },
+    {
+        'argument': [
+            { 'x': 2 },
+            { 'x2': 4 },
+        ],
+        'expectedResult': [
+            { 'y': 6 },
+            { 'y2': 12 },
+        ],
+    },
+    {
+        'argument': [
+            { 'x': 2 },
+            { 'x2': 4 },
+        ],
+        'expectedResult': [
+            { 'y': 6 },
+            { 'y2': 12 },
+        ],
+    },
+    {
+        'argument': [
+            { 'x': 2 },
+            { 'x2': 4 },
+        ],
+        'expectedResult': [
+            { 'y': 6 },
+            { 'y2': 12 },
+        ],
+    },
+];

@@ -1,0 +1,30 @@
+[
+    {
+        'name': 'square',
+        'description': 'return x squared',
+    },
+    {
+        'name': 'invertCase',
+        'description': 'x is a string. turn lowercase letters to uppercase and vice versa.',
+    },
+    {
+        'name': 'sumDigits',
+        'description': 'sum the digits of the number x',
+    },
+    {
+        'name': 'flatten',
+        'description': 'x is an arbitrarily nested, multidimensional array. return x flattened (all items in 1 dimension)',
+    },
+    {
+        'name': 'isBalanced',
+        'description': 'x is a string. return whether its parentheses are balanced that is, whether every opening ( has a closing )',
+    },
+    {
+        'name': 'hasBalancePoint',
+        'description': 'x is an array of numbers. return whether there is an index where the sum before (excluding) it is equal to the sum after (including) it.',
+    },
+    {
+        'name': 'mode',
+        'description': 'x is an array of at least 1 item. return the most frequent item (there won"t be collisions)',
+    },
+];
