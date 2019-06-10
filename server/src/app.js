@@ -1,16 +1,24 @@
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import express from 'express';
 import { connectDb, disconnectDb } from './models';
-//import errorMiddleware from './middleware/error.middleware';
+import { errorMiddleware } from './middleware/error.middleware';
+import { loggerMiddleware } from './middleware/logger.middleware';
+import { LevelsController } from './controller/levels';
+
+dotenv.config({ path: './.env' });
 
 class App {
 
     constructor() {
         this.app = express();
-
+        this.controllers = [
+            new LevelsController(),
+        ];
         this.initializeMiddlewares();
-        connectDb();
+        this.db = connectDb();
+        this.initializeControllers();
         this.initializeErrorHandling();
     }
 
@@ -21,7 +29,7 @@ class App {
             console.log('/*************** *************** ***************/');
             console.log(`App listening on the port ${process.env.PORT}`);
         }).on('error', (err) => {
-            console.log(err);
+            console.error(err);
             disconnectDb();
             process.exit(1);
         });
@@ -31,17 +39,22 @@ class App {
         this.app.use(cors());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(loggerMiddleware);
     }
 
     initializeErrorHandling() {
+        this.app.use(errorMiddleware);
     }
-/*
-  initializeControllers(controllers: Controller[]) {
-    controllers.forEach((controller) => {
-      this.app.use("/", controller.router);
-    });
-  }
-*/
+
+    initializeControllers() {
+        this.app.get('/', function (req, res) {
+            res.send('Hello js-under-pressure !');
+        });
+        this.controllers.forEach((controller) => {
+            this.app.use('/', controller.router);
+        });
+    }
+
 }
 
 export { App };

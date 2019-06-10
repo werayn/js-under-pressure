@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
+import uuid from 'uuid';
 
 const levelSchema = new mongoose.Schema({
-    _id: {
+    id:{
         type: String,
-        default: uuid.v1
+        unique: true,
+        default: uuid.v1,
     },
     name: {
         type: String,

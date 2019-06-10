@@ -9,11 +9,6 @@ const testSchema = new mongoose.Schema({
         type: Array,
         unique: true,
     },
-    level : {
-        type: mongoose.Types.ObjectId,
-        unique: true,
-        ref: 'Level',
-    },
 });
 
 const Test = mongoose.model('Test', testSchema);
