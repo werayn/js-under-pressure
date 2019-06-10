@@ -47,11 +47,14 @@ class App {
     }
 
     initializeControllers() {
-        this.app.get('/', function (req, res) {
+        this.app.get('/', (req, res) => {
             res.send('Hello js-under-pressure !');
         });
         this.controllers.forEach((controller) => {
             this.app.use('/', controller.router);
+        });
+        this.app.get('*', (req, res) => {
+            res.send('You love exploration ?');
         });
     }
 
