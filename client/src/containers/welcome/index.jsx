@@ -9,7 +9,7 @@ class Welcome extends React.Component {
         return (
             <div>
                 <p>
-                    {'Welcome to a stupid clone of'}
+                    {'Welcome to a stupid clone of '}
                     <a href="https://github.com/werayn/js-under-pressure">
                         {'You Can\'t JavaScript Under Pressure'}
                     </a>

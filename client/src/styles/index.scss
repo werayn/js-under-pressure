@@ -1,5 +1,18 @@
 html, body, .grid-container { height: 100%; margin: 0; }
 
+body {
+    background-image: url(back-img.jpg);
+    overflow: hidden;
+    font-family: helvetica, arial, sans-serif;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
 
 .grid-container * {
  position: relative;
@@ -19,12 +32,35 @@ html, body, .grid-container { height: 100%; margin: 0; }
 }
 
 .editor {
+    position: absolute;
+    top: 42px;
+    left: 350px;
+    padding: 1em;
+    font-size: 1.2em;
+    border: 1px solid;
+    border-width: 1px;
+    background-color: antiquewhite;
     grid-area: editor;
-    border: 1px solid red;
 }
 
 .log {
+    position: absolute;
+    top: 70%;
+    bottom: 2%;
+    left: 2%;
+    right: 2%;
+    margin: 0;
+    padding: 10px;
+    background: #ffe;
+    font-size: 1.2em;
+    font-family: monospace;
+    overflow-y: scroll;
+    background-color: grey;
     grid-area: log;
-    border: 1px solid red;
+}
+
+
+#log-wrapper .log-line {
+    padding: 4px;
 }
 

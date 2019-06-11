@@ -11,32 +11,28 @@ class App extends React.Component {
     }
 
     handleEnterQ(e) {
-        if (e.keyCode === 13 && e.ctrlKey) {
+        /*if (e.keyCode === 13 && e.ctrlKey) {
             console.log('ENTER BRO');
             if (!this.props.AppStore.level === 0) {
                 this.props.AppStore.levelUp;
                 this.props.AppStore.startTimer;
                 this.props.AppStore.startTest;
             }
-            /*            else if (!this.props.AppStore.check === 2 ) {
+                     else if (!this.props.AppStore.check === 2 ) {
               this.props.
             }
-        */      }
+             }
         if (e.keyCode === 81 && e.ctrlKey) {
             console.log('QUIT BRO');
-            /* else */if (this.AppStore.state === true) {
+             else if (this.AppStore.state === true) {
                 this.AppStore.levelUp;
             }
-            /*
+
             if (this.AppStore.level === this.AppStore.levels.length) {
                 this.AppStore.endTest;
             }
-            */
-            else {
-                this.AppStore.skiped;
-            }
-        }
-        console.log(this.state.skip, this.state.start);
+
+        }*/
     }
 
 
@@ -51,7 +47,7 @@ class App extends React.Component {
     render () {
 
         return (
-            <div className="grid-container">
+            <div>
                 <MainEditor />
                 <LogScreen />
             </div>

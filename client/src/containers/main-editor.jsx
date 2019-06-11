@@ -3,6 +3,7 @@ import React from 'react';
 import { Welcome } from './welcome/index.jsx';
 import { Editor } from './editor/index.jsx';
 
+
 //@inject('AppStore')
 class MainEditor extends React.Component {
 
@@ -11,18 +12,9 @@ class MainEditor extends React.Component {
     }
 
     render () {
-        const {
-            start,
-        } = false;
         return (
-            <div className="editor">
-                {
-                    start ? (
-                        <Editor { ...this.props } />
-                    ) : (
-                        <Welcome { ...this.props } />
-                    )
-                }
+            <div>
+                <Editor { ...this.props } />
             </div>
         );
     }

@@ -1,13 +1,13 @@
 import { observable, runInAction } from 'mobx';
 
 class AppStore {
-    @observable test = [];
-    @observable levels = [];
+    //   @observable test = [];
+    // @observable levels = [];
 
     constructor(api) {
         this.Api = api;
     }
-
+    /*
     fetchLevels = async () => {
         const levels = await this.Api.fetchLevels();
 
@@ -23,7 +23,7 @@ class AppStore {
             this.test = test;
         });
     }
-    /*  @observable check = 0;
+      @observable check = 0;
     @observable skiped = false;
     @observable state = 0;
     @observable count = 0;

@@ -4,15 +4,15 @@ class LogScreen extends React.Component {
     render () {
         return (
             <div className="log">
-                <h1>
+                <div className="log-line">
                     { 'Ctrl+Enter or ⌘+Enter to submit/continue, (Ctrl/⌘)+Q to skip a level, (Ctrl/⌘)+R to restart a level.' }
-                </h1>
-                <h2>
+                </div>
+                <div className="log-line">
                     { 'Loading levels...' }
-                </h2>
-                <h3>
+                </div>
+                <div className="log-line">
                     { 'Finished loading levels. Proceed.' }
-                </h3>
+                </div>
             </div>
 
         );
