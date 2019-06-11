@@ -1,39 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    static propTypes = {
-        start: PropTypes.isBoolean.isRequired,
-        skip: PropTypes.isBoolean.isRequired,
-        level: PropTypes.isNumber.isRequired,
+    constructor() {
+        super();
     }
 
     render() {
-
-        const Skip = (skip) => {
-            if (skip) {
-                return (
-                    <h2>
-                        {'You cannot skip now'}
-                    </h2>);
-            }
-        };
-
         return (
             <div>
-                <h1>
-                    {' This is Welcome'}
-                </h1>
-                <Skip skip={ this.props.skip } />
-                <h3>
-                    { this.props.level }
-                    { this.props.start }
-                    { this.props.skip }
-                </h3>
+                <p>
+                    {'Welcome to a stupid clone of'}
+                    <a href="https://github.com/werayn/js-under-pressure">
+                        {'You Can\'t JavaScript Under Pressure'}
+                    </a>
+                    {'. I\'m less a fan of layout changes, social media, and bright colours.'}
+                </p>
+                <p>
+                    {'Same principle:'}
+                </p>
+                <ul>
+                    <li>
+                        {'A bunch of questions'}
+                    </li>
+                    <li>
+                        {'Ticking timer'}
+                    </li>
+                </ul>
+                {'Hit Ctrl+Enter (⌘+Enter on Mac) to proceed a level or submit, (Ctrl/⌘)+Esc to skip a level.'}
+                <p />
+                <p>
+                    {'Source and complaints:'}
+                    <a href="https://github.com/werayn/js-under-pressure">
+                        {'werayn/js-under-pressure'}
+                    </a>
+                </p>
             </div>
         );
     }

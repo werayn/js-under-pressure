@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from 'containers/app.jsx';
-import { AppStore } from 'mobx/index.jsx';
+import { Api } from 'network/api.js';
+import { AppStore } from 'mobx/index.js';
 
-const store = new AppStore();
+const api = new Api();
+const store = new AppStore(api);
 /**
  * DOM component - setup main component into root div
  * @reactProps {none} none - none

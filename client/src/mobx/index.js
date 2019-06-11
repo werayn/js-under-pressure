@@ -1,18 +1,36 @@
-import {
-    observable,
-    action,
-} from 'mobx';
+import { observable, runInAction } from 'mobx';
 
 class AppStore {
-    @observable level = 0;
-    @observable check = 0;
+    @observable test = [];
+    @observable levels = [];
+
+    constructor(api) {
+        this.Api = api;
+    }
+
+    fetchLevels = async () => {
+        const levels = await this.Api.fetchLevels();
+
+        runInAction(() => {
+            this.levels = levels;
+        });
+    }
+
+    fetchTest = async () => {
+        const test = await this.Api.fetchLevels();
+
+        runInAction(() => {
+            this.test = test;
+        });
+    }
+    /*  @observable check = 0;
     @observable skiped = false;
     @observable state = 0;
     @observable count = 0;
     @observable levels= [];
     @observable test = [];
-
-    @action.bound
+*/
+    /*   @action.bound
     levelUp() {
         this.level += 1;
     }
@@ -38,7 +56,7 @@ class AppStore {
     endTest() {
         this.state = 2;
         clearInterval(this.startTime());
-    }
+    }*/
 }
 
 export { AppStore };

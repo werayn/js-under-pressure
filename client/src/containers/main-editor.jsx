@@ -1,9 +1,9 @@
 import React from 'react';
-import { inject } from 'mobx-react';
+//import { inject } from 'mobx-react';
 import { Welcome } from './welcome/index.jsx';
 import { Editor } from './editor/index.jsx';
 
-@inject('AppStore')
+//@inject('AppStore')
 class MainEditor extends React.Component {
 
     constructor(props) {
@@ -13,7 +13,7 @@ class MainEditor extends React.Component {
     render () {
         const {
             start,
-        } = this.props;
+        } = false;
         return (
             <div className="editor">
                 {

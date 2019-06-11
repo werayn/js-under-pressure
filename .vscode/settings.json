@@ -41,5 +41,7 @@
   "javascript.preferences.quoteStyle": "single",
   "files.insertFinalNewline": true,
   "editor.insertSpaces": true,
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false
 }

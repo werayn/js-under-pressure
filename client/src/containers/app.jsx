@@ -1,10 +1,9 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+//import { observer } from 'mobx-react';
 import { MainEditor } from './main-editor.jsx';
 import { LogScreen } from './log-screen.jsx';
 import 'styles/index.scss';
 
-@observer
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +18,7 @@ class App extends React.Component {
                 this.props.AppStore.startTimer;
                 this.props.AppStore.startTest;
             }
-/*            else if (!this.props.AppStore.check === 2 ) {
+            /*            else if (!this.props.AppStore.check === 2 ) {
               this.props.
             }
         */      }
@@ -50,22 +49,12 @@ class App extends React.Component {
     }
 
     render () {
-        const {
-            AppStore
-        } = this.props.AppStore
 
         return (
             <div className="grid-container">
-                {
-                    AppStore.state === 2 ?
-                      (  <Result />)
-                    :
-                    (
-                        <MainEditor />
-                        <LogScreen />
-        )
-                }
-     </div>
+                <MainEditor />
+                <LogScreen />
+            </div>
         );
     }
 }
