@@ -3,7 +3,7 @@
 ## Description
 
 Welcome !
-Js-under-pressure is a website to test, built with `Reactjs` and `NodeJs`.
+Js-under-pressure is a website to test your js skills, built with `Reactjs` and `NodeJs`.
 
 ## Getting started
 
@@ -16,8 +16,9 @@ Here an exemple of the needed packages with Visual Studio Code IDE:
 
 - `Reactjs code snippets`
 - `ESLint`
+- `mobx-snippet`
 
-#### Node / Npm
+#### Node / Npm / Yarn
 
 Since it's a JS-Based project, due to ReactJs & express you need to install some stuff on your computer:
 
@@ -46,6 +47,12 @@ choco install -y nodejs.install python2 jdk8 npm
 
 ---
 
+- Yarn:
+  Follow the [install instructions for yarn](https://yarnpkg.com/en/docs/install#windows-stable) to
+    to install yarn
+
+---
+
 ### Install the project
 
 First you need to clone the repository:
@@ -56,16 +63,24 @@ git@github.com:werayn/js-under-pressure.git
 ```
 
 ```bash
-TODO
+cd client && yarn && cd ../server && yarn
 ```
 
 ### Run it
 
 When everything is installed, if you want to run it, do the following:
 
+server :
 ```bash
-TODO
+yarn start
 ```
+
+client :
+```bash
+yarn start:dev
+```
+
+The linter will start everytime you enter this command.
 
 ### Test it
 
@@ -77,7 +92,7 @@ TODO
 
 ## Documentation
 
-if you want to know everything about our website just run in a NEW TERM :
+if you want to know everything about our website just run:
 
 ```bash
 TODO
@@ -97,4 +112,4 @@ We use nothing for versioning right now.
 
 ## License
 
-This project is no licensed - it's a completely private project.
+This project is no licensed.
