@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import DevTools from 'mobx-react-devtools';
 import { App } from 'containers/app.jsx';
 import { Api } from 'network/api.js';
-import { AppStore } from 'mobx/index.js';
+import { AppStore } from 'store/index.js';
 
 const api = new Api();
 const store = new AppStore(api);
@@ -17,6 +18,8 @@ const store = new AppStore(api);
  */
 /*eslint react/jsx-filename-extension: 0*/
 ReactDOM.render((
-    <App store={ store } />
+    <div>
+        <App store={ store } />
+    </div>
 ),
 document.getElementById('root'));

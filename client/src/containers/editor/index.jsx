@@ -1,6 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace';
-import Tester from '../../utils/tester';
+//import Tester from '../../utils/tester';
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -72,7 +72,7 @@ class Editor extends React.Component {
         } = this.state;
 
         if (valid) {
-            Tester.FuncExecutor(value, 'square');
+            // Tester.FuncExecutor(value, 'square');
             // exec func & get res
             // call mobx action to edit log
         }

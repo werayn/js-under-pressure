@@ -1,6 +1,6 @@
 import React from 'react';
 //import { inject } from 'mobx-react';
-import { Welcome } from './welcome/index.jsx';
+// import { Welcome } from './welcome/index.jsx';
 import { Editor } from './editor/index.jsx';
 
 
@@ -14,7 +14,7 @@ class MainEditor extends React.Component {
     render () {
         return (
             <div>
-                <Editor { ...this.props } />
+                <Editor />
             </div>
         );
     }

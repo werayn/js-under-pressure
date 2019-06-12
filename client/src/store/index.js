@@ -1,13 +1,16 @@
 import { observable, runInAction } from 'mobx';
 
 class AppStore {
-    //   @observable test = [];
-    // @observable levels = [];
+    @observable test = [];
+    @observable levels = [];
 
     constructor(api) {
         this.Api = api;
+        this.fetchLevels = this.fetchLevels.bind(this);
+        this.fetchTest = this.fetchTest.bind(this);
+        //this.fetchLevels();
     }
-    /*
+
     fetchLevels = async () => {
         const levels = await this.Api.fetchLevels();
 
@@ -16,20 +19,20 @@ class AppStore {
         });
     }
 
-    fetchTest = async () => {
-        const test = await this.Api.fetchLevels();
+    fetchTest = async (id) => {
+        const test = await this.Api.fetchTest(id);
 
         runInAction(() => {
             this.test = test;
         });
     }
-      @observable check = 0;
+/*      @observable check = 0;
     @observable skiped = false;
     @observable state = 0;
     @observable count = 0;
     @observable levels= [];
     @observable test = [];
-*/
+
     /*   @action.bound
     levelUp() {
         this.level += 1;
