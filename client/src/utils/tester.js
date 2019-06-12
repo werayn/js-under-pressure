@@ -1,65 +1,40 @@
-const box = {};
-class Tester {
+
+/*import ivm from 'isolated-vm';
+
+class Runner {
 
     constructor() {
-        this.stringCall = null;
+        // Create a new isolate limited to 128MB
+        this.isolate = new ivm.Isolate({ memoryLimit: 128 });
+
+        // Create a new context within this isolate. Each context has its own copy of all the builtin
+        // Objects. So for instance if one context does Object.prototype.foo = 1 this would not affect any
+        // other contexts.
+        this.context = this.isolate.createContextSync();
+
+        // Get a Reference{} to the global object within the context.
+        this.jail = this.context.global;
+
+        // This make the global object available in the context as `global`. We use `derefInto()` here
+        // because otherwise `global` would actually be a Reference{} object in the new isolate.
+        this.jail.setSync('global', this.jail.derefInto());
+        // The entire ivm module is transferable! We transfer the module to the new isolate so that we
+        // have access to the library from within the isolate.
+        this.jail.setSync('_ivm', ivm);
+
+        // We will create a basic `log` function for the new isolate to use.
+        this.jail.setSync('_log', new ivm.Reference(function(...args) {
+            console.log(...args);
+        }));
     }
 
-    equal (left, right) {
-        if (left === right || Object(left) === Object(right)) {
-            return true;
-        }
-
-        //arrays
-        if (Array.isArray(left)) {
-            if (!Array.isArray(right) || left.length !== right.length) {
-                return false;
-            }
-
-            return left.every(function testArrayItemEquality (item, idx) {
-                return this.equal(item, right[idx]);
-            });
-        }
-
-        //now, this is not a generic solution, this is tailored for the questions.
-        // we will only deal with primitives (and their objects) and arrays.
-        // so, we cheat.
-        return false;
-    }
-
-    constructFunc(name, param) {
-        return name + '(' + JSON.stringify(param) + ')';
-    }
-
-
-    CheckIt(form, result, expected) {
-
-        if (this.equal(result, expected)) {
-            console.log('passed');
-        }
-        else {
-            console.log('Failed');
-        }
-    }
-
-    static FuncExecutor(code, name) {
-
-        try {
-            // eslint-disable-next-line no-new-func
-            Function(code)();
-
-            const fun = box[name];
-            if (!fun) {
-                throw 'Function ' + name + ' not defined on box';
-            }
-            this.stringCall = this.constructFunctionCall(name, 2);
-            this.checkIt(this.stringCall, fun(2), 4);
-
-        }
-        catch (e) {
-            console.error(e);
-        }
+    tester(tests, code) {
+        const ret = [];
+        tests.forEach(test => {
+        });
+        console.log(ret);
     }
 }
 
-export default Tester;
+export default Runner;
+*/

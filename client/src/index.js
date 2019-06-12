@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DevTools from 'mobx-react-devtools';
+import { Provider } from 'mobx-react';
 import { App } from 'containers/app.jsx';
 import { Api } from 'network/api.js';
 import { AppStore } from 'store/index.js';
@@ -18,8 +18,8 @@ const store = new AppStore(api);
  */
 /*eslint react/jsx-filename-extension: 0*/
 ReactDOM.render((
-    <div>
-        <App store={ store } />
-    </div>
+    <Provider store={ store }>
+        <App />
+    </Provider>
 ),
 document.getElementById('root'));

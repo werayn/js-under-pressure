@@ -1,14 +1,16 @@
-import { observable, runInAction } from 'mobx';
+import { observable,
+    runInAction,
+    action,
+} from 'mobx';
 
 class AppStore {
     @observable test = [];
     @observable levels = [];
+    @observable start = false;
+    @observable skip = false;
 
     constructor(api) {
         this.Api = api;
-        this.fetchLevels = this.fetchLevels.bind(this);
-        this.fetchTest = this.fetchTest.bind(this);
-        //this.fetchLevels();
     }
 
     fetchLevels = async () => {
@@ -25,6 +27,15 @@ class AppStore {
         runInAction(() => {
             this.test = test;
         });
+    }
+
+    @action.bound
+    detectSkip() {
+        this.skip = true;
+    }
+    @action.bound
+    startEndTest() {
+        this.start = !this.start;
     }
 /*      @observable check = 0;
     @observable skiped = false;

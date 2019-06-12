@@ -1,20 +1,37 @@
 import React from 'react';
-//import { inject } from 'mobx-react';
-// import { Welcome } from './welcome/index.jsx';
+import PropTypes from 'prop-types';
+import {
+    observer,
+    inject,
+} from 'mobx-react';
+import { Welcome } from './welcome/index.jsx';
 import { Editor } from './editor/index.jsx';
 
 
-//@inject('AppStore')
+@inject('store')
+@observer
 class MainEditor extends React.Component {
+
+    static propTypes = {
+        store: PropTypes.any.isRequired,
+    };
 
     constructor(props) {
         super(props);
     }
 
     render () {
+        const {
+            start,
+        } = this.props.store.start;
+        console.log(start);
         return (
             <div>
-                <Editor />
+                {
+                    (start) ?
+                        <Editor /> :
+                        <Welcome />
+                }
             </div>
         );
     }

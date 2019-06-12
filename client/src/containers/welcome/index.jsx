@@ -7,7 +7,7 @@ class Welcome extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="editor">
                 <p>
                     {'Welcome to a stupid clone of '}
                     <a href="https://github.com/werayn/js-under-pressure">

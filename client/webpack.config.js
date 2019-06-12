@@ -43,4 +43,7 @@ module.exports = {
             favicon: path.join(__dirname,'public','favicon.png'),
         }),
     ],
+    node: {
+        fs: 'empty',
+    },
 };

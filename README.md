@@ -63,7 +63,7 @@ git@github.com:werayn/js-under-pressure.git
 ```
 
 ```bash
-cd client && yarn && cd ../server && yarn
+cd client && yarn setup && cd ../server && yarn
 ```
 
 ### Run it

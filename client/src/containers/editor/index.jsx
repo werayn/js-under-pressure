@@ -1,14 +1,24 @@
 import React from 'react';
 import AceEditor from 'react-ace';
-//import Tester from '../../utils/tester';
-
+//import Runner from '../../utils/tester';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
 const defaultValue = `function square(x) {
 
 }`;
-
+/*
+const tests = [
+    {
+        argument: 2,
+        expected: 4,
+    },
+    {
+        argument: 3,
+        expected: 6,
+    },
+];
+*/
 const markers = [
     {
         startRow: 3,
@@ -23,6 +33,7 @@ class Editor extends React.Component {
         this.state = {
             value: defaultValue,
             valid: false,
+            // runner: new Runner(),
         };
         this.handleOnLoad = this.handleOnLoad.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -65,14 +76,15 @@ class Editor extends React.Component {
     }
 
     Exec(event) {
-        console.log(event.getValue(2));
         const {
-            value,
+            //            value,
             valid,
+            // runner,
         } = this.state;
 
         if (valid) {
-            // Tester.FuncExecutor(value, 'square');
+            console.log('cest pas valide');
+            //runner.startTest(tests, value);
             // exec func & get res
             // call mobx action to edit log
         }

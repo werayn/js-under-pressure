@@ -1,40 +1,36 @@
 import React from 'react';
-//import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import { MainEditor } from './main-editor.jsx';
 import { LogScreen } from './log-screen.jsx';
 import 'styles/index.scss';
+import { observer } from 'mobx-react';
 
+@inject('store')
+@observer
 class App extends React.Component {
+
+    static propTypes = {
+        store: PropTypes.any.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.handleEnterQ = this.handleEnterQ.bind(this);
     }
 
     handleEnterQ(e) {
-        /*if (e.keyCode === 13 && e.ctrlKey) {
+        if (e.keyCode === 13 && e.ctrlKey) {
             console.log('ENTER BRO');
-            if (!this.props.AppStore.level === 0) {
-                this.props.AppStore.levelUp;
-                this.props.AppStore.startTimer;
-                this.props.AppStore.startTest;
-            }
-                     else if (!this.props.AppStore.check === 2 ) {
-              this.props.
-            }
-             }
+            console.log(this.props.store);
+            this.props.store.startEndTest();
+        }
+
         if (e.keyCode === 81 && e.ctrlKey) {
-            console.log('QUIT BRO');
-             else if (this.AppStore.state === true) {
-                this.AppStore.levelUp;
-            }
+            console.log('skipped');
+        }
 
-            if (this.AppStore.level === this.AppStore.levels.length) {
-                this.AppStore.endTest;
-            }
-
-        }*/
     }
-
 
     componentDidMount() {
         document.addEventListener('keydown', this.handleEnterQ);
