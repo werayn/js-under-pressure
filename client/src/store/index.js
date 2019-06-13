@@ -8,6 +8,7 @@ class AppStore {
     @observable levels = [];
     @observable start = false;
     @observable skip = false;
+    @observable save = [];
 
     constructor(api) {
         this.Api = api;
@@ -27,6 +28,11 @@ class AppStore {
         runInAction(() => {
             this.test = test;
         });
+    }
+
+    @action.bound
+    saveLevel(save) {
+        this.clock.save.push(save);
     }
 
     @action.bound

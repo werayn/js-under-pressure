@@ -4,6 +4,7 @@ import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 import { EnterButton } from '../../components/EnterButton.jsx';
+import { Timer } from '../../components/timer.jsx';
 
 const defaultValue = `function square(x) {
 
@@ -145,7 +146,8 @@ class Editor extends React.Component {
                         } }
                     />
                 </div>
-                <div className="col-md-2 Button">
+                <div className="col-md-2 ">
+                    <Timer start={ Date.now() } />
                     <EnterButton />
                 </div>
             </div>
