@@ -1,4 +1,9 @@
-html, body, .grid-container { height: 100%; margin: 0; }
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
 body {
     background-image: url(back-img.jpg);
@@ -7,60 +12,46 @@ body {
 }
 
 p {
-    display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
 
-.grid-container * {
- position: relative;
-}
+.shadow {
+    -webkit-border-radius: 0% 0% 100% 100% / 0% 0% 8px 8px;
+    -webkit-box-shadow: rgba(0, 0, 0,.30) 0 2px 3px;
+    }
 
-.grid-container *:after {
-    position: absolute;
-    top: 0;
-    left: 0;
+.toto {
+    height: 100px;
 }
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1.3fr 0.7fr;
-  grid-template-areas: "editor" "log";
-}
-
-.editor {
-    position: absolute;
-    top: 42px;
-    left: 350px;
-    padding: 1em;
+.welcome {
     font-size: 1.2em;
-    border: 1px solid;
-    border-width: 1px;
     background-color: antiquewhite;
-    grid-area: editor;
+    margin-top: 10%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 2px #fff inset,
+                -1px -1px 2px #fff inset;
+    border-radius: 3px/6px;
 }
 
 .log {
-    position: absolute;
-    top: 70%;
-    bottom: 2%;
-    left: 2%;
-    right: 2%;
-    margin: 0;
-    padding: 10px;
+    width: 100%;
+    bottom:0%;
+    margin-top: 1%;
     background: #ffe;
     font-size: 1.2em;
     font-family: monospace;
     overflow-y: scroll;
     background-color: grey;
-    grid-area: log;
 }
 
 
-#log-wrapper .log-line {
+.log-line {
     padding: 4px;
 }
 
+.Button {
+    padding-left: 7%;
+}

@@ -3,6 +3,7 @@ import AceEditor from 'react-ace';
 //import Runner from '../../utils/tester';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
+import { EnterButton } from '../../components/EnterButton.jsx';
 
 const defaultValue = `function square(x) {
 
@@ -40,6 +41,7 @@ class Editor extends React.Component {
         this.handleOnSelectionChange = this.handleOnSelectionChange.bind(this);
         this.handleOnCursorChange = this.handleOnCursorChange.bind(this);
         this.handleOnValidate = this.handleOnValidate.bind(this);
+        this.getInitHeight = this.getInitHeight.bind(this);
         this.Exec = this.Exec.bind(this);
     }
 
@@ -95,37 +97,58 @@ class Editor extends React.Component {
 
     }
 
+    getInitHeight(editor){
+        if (editor){
+            let newHeight;
+            newHeight = editor.getSession()
+                .getScreenLength() *
+              (editor.renderer.lineHeight + editor.renderer.scrollBar.getWidth());
+            newHeight = newHeight > 70 ? newHeight : 70;
+            console.log(newHeight);
+            return `${newHeight}px`;
+        }
+    }
+
     render() {
         return (
-            <AceEditor
-                markers={ markers }
-                commands={ [{   // commands is array of key bindings.
-                    name: 'test', //name for the key binding.
-                    bindKey: {win: 'Ctrl-Return', mac: 'Command-Return'}, //key combination used for the command.
-                    exec: this.Exec,  // name of the command to rebind
-                }] }
-                placeholder="placeholder text"
-                mode="javascript"
-                theme="monokai"
-                name="blah2"
-                onLoad={ this.handleOnLoad }
-                onChange={ this.handleOnChange }
-                onSelectionChange={ this.handleOnSelectionChange }
-                onCursorChange={ this.handleOnCursorChange }
-                onValidate={ this.handleOnValidate }
-                value={ this.state.value }
-                fontSize={ 14 }
-                showPrintMargin
-                showGutter
-                highlightActiveLine
-                setOptions={ {
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    enableSnippets: false,
-                    showLineNumbers: true,
-                    tabSize: 2,
-                } }
-            />
+            <div className="row">
+                <div className="col-md-10">
+                    <AceEditor
+                        markers={ markers }
+                        commands={ [{   // commands is array of key bindings.
+                            name: 'test', //name for the key binding.
+                            bindKey: {win: 'Ctrl-Return', mac: 'Command-Return'}, //key combination used for the command.
+                            exec: this.Exec,  // name of the command to rebind
+                        }] }
+                        height="420px"
+                        width="100%"
+                        placeholder="placeholder text"
+                        mode="javascript"
+                        theme="monokai"
+                        name="blah2"
+                        onLoad={ this.handleOnLoad }
+                        onChange={ this.handleOnChange }
+                        onSelectionChange={ this.handleOnSelectionChange }
+                        onCursorChange={ this.handleOnCursorChange }
+                        onValidate={ this.handleOnValidate }
+                        value={ this.state.value }
+                        fontSize={ 14 }
+                        showPrintMargin
+                        showGutter
+                        highlightActiveLine
+                        setOptions={ {
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            enableSnippets: false,
+                            showLineNumbers: true,
+                            tabSize: 2,
+                        } }
+                    />
+                </div>
+                <div className="col-md-2 Button">
+                    <EnterButton />
+                </div>
+            </div>
         );
     }
 }

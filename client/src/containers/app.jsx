@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import { MainEditor } from './main-editor.jsx';
-import { LogScreen } from './log-screen.jsx';
+import { LogScreen } from './logger/log-screen.jsx';
 import 'styles/index.scss';
 import { observer } from 'mobx-react';
 
@@ -43,7 +43,7 @@ class App extends React.Component {
     render () {
 
         return (
-            <div>
+            <div className="container-fluid">
                 <MainEditor />
                 <LogScreen />
             </div>

@@ -37,6 +37,11 @@ class AppStore {
     startEndTest() {
         this.start = !this.start;
     }
+
+    @action
+    Submit() {
+        console.log('nous on reste orthodoxes');
+    }
 /*      @observable check = 0;
     @observable skiped = false;
     @observable state = 0;

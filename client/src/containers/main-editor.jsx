@@ -21,18 +21,10 @@ class MainEditor extends React.Component {
     }
 
     render () {
-        const {
-            start,
-        } = this.props.store.start;
-        console.log(start);
         return (
-            <div>
-                {
-                    (start) ?
-                        <Editor /> :
-                        <Welcome />
-                }
-            </div>
+            (this.props.store.start) ?
+                <Editor /> :
+                <Welcome />
         );
     }
 }
