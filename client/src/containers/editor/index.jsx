@@ -1,14 +1,16 @@
 import React from 'react';
 import AceEditor from 'react-ace';
-//import Runner from '../../utils/tester';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 import { EnterButton } from '../../components/EnterButton.jsx';
 import { Timer } from '../../components/timer.jsx';
+import WebWorker from '../../sandbox/webWorker.js';
+import customWorker from '../../sandbox/myWorker.js';
 
-const defaultValue = `function square(x) {
-
-}`;
+const defaultValue = `box.square = function square (x) {
+    x = x * x;
+    return x;
+};`;
 /*
 const tests = [
     {
@@ -35,14 +37,12 @@ class Editor extends React.Component {
         this.state = {
             value: defaultValue,
             valid: false,
-            // runner: new Runner(),
         };
         this.handleOnLoad = this.handleOnLoad.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSelectionChange = this.handleOnSelectionChange.bind(this);
         this.handleOnCursorChange = this.handleOnCursorChange.bind(this);
         this.handleOnValidate = this.handleOnValidate.bind(this);
-        this.getInitHeight = this.getInitHeight.bind(this);
         this.Exec = this.Exec.bind(this);
     }
 
@@ -67,47 +67,36 @@ class Editor extends React.Component {
         if (res.length === 0) {
             this.setState({
                 valid: true,
-                err: null,
             });
         }
         else {
             this.setState({
-                valid: true,
-                err: null,
+                valid: false,
             });
         }
     }
 
     Exec(event) {
         const {
-            //            value,
+            value,
             valid,
-            // runner,
         } = this.state;
-
         if (valid) {
-            console.log('cest pas valide');
-            //runner.startTest(tests, value);
-            // exec func & get res
-            // call mobx action to edit log
+            const worker = new WebWorker(customWorker);
+            worker.postMessage({
+                code: value,
+                name: 'square',
+            });
+            worker.addEventListener('message', (e) => {
+                console.log('in editor');
+                console.log(e.data);
+            });
         }
         else {
             // call mobx action to edit log
-
+            console.log('nop pas valide');
         }
 
-    }
-
-    getInitHeight(editor){
-        if (editor){
-            let newHeight;
-            newHeight = editor.getSession()
-                .getScreenLength() *
-              (editor.renderer.lineHeight + editor.renderer.scrollBar.getWidth());
-            newHeight = newHeight > 70 ? newHeight : 70;
-            console.log(newHeight);
-            return `${newHeight}px`;
-        }
     }
 
     render() {

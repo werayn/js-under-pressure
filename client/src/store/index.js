@@ -46,7 +46,6 @@ class AppStore {
 
     @action
     Submit() {
-        console.log('nous on reste orthodoxes');
     }
 /*      @observable check = 0;
     @observable skiped = false;
