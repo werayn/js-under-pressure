@@ -34,6 +34,10 @@ module.exports = {
                 test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
                 loaders: ['file-loader'],
             },
+            {
+                test: /\.worker\.js$/,
+                use: { loader: 'worker-loader' },
+            },
         ],
     },
     plugins: [

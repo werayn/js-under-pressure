@@ -23,7 +23,9 @@ class App extends React.Component {
         if (e.keyCode === 13 && e.ctrlKey) {
             console.log('ENTER BRO');
             console.log(this.props.store);
-            this.props.store.startEndTest();
+            if (!this.props.store.start) {
+                this.props.store.startEndTest();
+            }
         }
 
         if (e.keyCode === 81 && e.ctrlKey) {
