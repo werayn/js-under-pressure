@@ -36,7 +36,6 @@ class Timer extends React.Component {
     timerBuilder() {
         const { start } = this.state;
         const ms = (new Date() - start);
-        console.log(ms);
         const elapsed = Math.round(ms / 100);
         let seconds = (elapsed / 10 ).toFixed(1);
 

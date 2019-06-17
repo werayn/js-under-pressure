@@ -148,7 +148,7 @@ class Editor extends React.Component {
                 </div>
                 <div className="col-md-2 ">
                     <Timer start={ Date.now() } />
-                    <EnterButton />
+                    <EnterButton submit={ this.Exec() } />
                 </div>
             </div>
         );
