@@ -3,6 +3,7 @@ export default function customWorker() {
     // eslint-disable-next-line no-unused-vars
     const box = {};
 
+    // eslint-disable-next-line no-unused-vars
     const onmessage = (event) => {
         const code = event.data.code;
         const name = event.data.name;
