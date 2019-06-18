@@ -16,20 +16,31 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        this.props.store.fetchLevels();
         this.handleEnterQ = this.handleEnterQ.bind(this);
     }
 
     handleEnterQ(e) {
-        if (e.keyCode === 13 && e.ctrlKey) {
-            console.log('ENTER BRO');
-            console.log(this.props.store);
-            if (!this.props.store.start) {
-                this.props.store.startEndTest();
-            }
+        if (e.keyCode === 13 && e.ctrlKey && this.props.store.start === 0) {
+            this.props.store.startEndTest();
         }
 
         if (e.keyCode === 81 && e.ctrlKey) {
-            console.log('skipped');
+            switch (this.props.store.start) {
+            case 1 :
+                this.props.store.skipLevel();
+                this.props.store.detectSkip();
+                console.log('skip level');
+                break;
+            case 2 :
+                // do nothing or maybe go back
+                console.log('result page');
+                break;
+            default :
+            // send logger you cant skip
+                console.log('you cant skip now');
+                break;
+            }
         }
 
     }

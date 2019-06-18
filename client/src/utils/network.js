@@ -17,10 +17,14 @@ const Network = () => {
     const defaultOptions = {
         baseURL: Config.API_URL,
         timeout: TIMEOUT,
+        crossDomain: true,
         responseType: 'json',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
         },
     };
 

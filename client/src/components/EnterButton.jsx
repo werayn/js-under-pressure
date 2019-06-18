@@ -8,7 +8,7 @@ import {
 class EnterButton extends React.Component {
 
     static propTypes = {
-        store: PropTypes.any.isRequired,
+        submit: PropTypes.func.isRequired,
     }
     constructor(props) {
         super(props);
@@ -16,7 +16,7 @@ class EnterButton extends React.Component {
 
     render() {
         return (
-            <button onClick={ this.props.store.Submit() } className="Button EnterButton">
+            <button onClick={ this.props.submit() } className="Button EnterButton">
                 {'Submit'}
             </button>
         );

@@ -58,6 +58,7 @@ axios.interceptors.response.use(
     (response) => {
         if (isDev()) {
             try {
+                console.log(response, 'response');
                 const requestDuration = Number(Date.now() - response.config.ts);
                 console.log('%c ' + response.status + ' - '
                             + getUrl(response.config)

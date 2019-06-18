@@ -12,7 +12,7 @@ const {
 } = process.env;
 
 const connectDb = () => {
-    return mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`, { useNewUrlParser: true, autoIndex: false }, (err) => {
+    return mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`, { useNewUrlParser: true, autoIndex: false, dbName: 'js-under-pressure' }, (err) => {
         if (err) {
             console.error(err);
             process.exit(1);
@@ -31,7 +31,7 @@ const disconnectDb = () => {
     });
 };
 
-const Level = mongoose.model('Level', levelSchema);
+const Level = mongoose.model('Level', levelSchema, 'levels');
 const Test = mongoose.model('Test', testSchema);
 
 const models = { Level, Test };

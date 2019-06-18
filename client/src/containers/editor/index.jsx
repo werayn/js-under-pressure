@@ -6,23 +6,10 @@ import { EnterButton } from '../../components/EnterButton.jsx';
 import { Timer } from '../../components/timer.jsx';
 import WebWorker from '../../sandbox/webWorker.js';
 import customWorker from '../../sandbox/myWorker.js';
+import { inject, observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import { toJS } from 'mobx';
 
-const defaultValue = `box.square = function square (x) {
-    x = x * x;
-    return x;
-};`;
-/*
-const tests = [
-    {
-        argument: 2,
-        expected: 4,
-    },
-    {
-        argument: 3,
-        expected: 6,
-    },
-];
-*/
 const markers = [
     {
         startRow: 3,
@@ -31,30 +18,53 @@ const markers = [
     },
 ];
 
+@inject('store')
+@observer
 class Editor extends React.Component {
+
+    static propTypes = {
+        store: PropTypes.any.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
-            value: defaultValue,
+            value: '',
             valid: false,
+            levels: toJS(this.props.store.levels),
         };
         this.handleOnLoad = this.handleOnLoad.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSelectionChange = this.handleOnSelectionChange.bind(this);
         this.handleOnCursorChange = this.handleOnCursorChange.bind(this);
         this.handleOnValidate = this.handleOnValidate.bind(this);
+        this.buildValue = this.buildValue.bind(this);
         this.Exec = this.Exec.bind(this);
     }
 
+    buildValue(i) {
+        this.setState({
+            value:`box.${this.state.levels[i].name} = function ${this.state.levels[i].name} (x) {
+// ${this.state.levels[i].description}
+};`,
+        });
+    }
+
     handleOnLoad() {
-        console.log('load');
-        //get tests
+        this.buildValue(this.props.store.level);
     }
 
     handleOnChange(newValue) {
-        this.setState({
-            value: newValue,
-        });
+        if (this.props.store.skip) {
+            this.setState({
+                value: this.buildValue(this.props.store.level),
+            });
+        }
+        else {
+            this.setState({
+                value: newValue,
+            });
+        }
     }
 
     handleOnSelectionChange() {
@@ -81,6 +91,7 @@ class Editor extends React.Component {
             value,
             valid,
         } = this.state;
+
         if (valid) {
             const worker = new WebWorker(customWorker);
             worker.postMessage({
@@ -88,7 +99,6 @@ class Editor extends React.Component {
                 name: 'square',
             });
             worker.addEventListener('message', (e) => {
-                console.log('in editor');
                 console.log(e.data);
             });
         }
@@ -137,7 +147,7 @@ class Editor extends React.Component {
                 </div>
                 <div className="col-md-2 ">
                     <Timer start={ Date.now() } />
-                    <EnterButton submit={ this.Exec() } />
+                    <EnterButton submit={ this.Exec } />
                 </div>
             </div>
         );

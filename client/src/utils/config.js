@@ -7,7 +7,7 @@
  */
 class Config {
     /** @type {string} - API url of our backend */
-    static API_URL = 'localhost:3042/';
+    static API_URL = 'http://localhost:3042';
 }
 
 export default Config;

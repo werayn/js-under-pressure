@@ -23,7 +23,7 @@ class LevelsController {
     getAllLevel(req, res, next) {
         models.Level.find()
             .then((levels) => {
-                (levels) ?
+                (Object.keys(levels).length > 0) ?
                     res.send(levels) :
                     next(new LevelsNotFound());
             });
