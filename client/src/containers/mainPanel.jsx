@@ -31,7 +31,6 @@ class MainPanel extends React.Component {
                 }
                 <LogScreen />
             </div>
-
         );
     }
 }

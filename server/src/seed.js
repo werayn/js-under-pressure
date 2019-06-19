@@ -1,14 +1,12 @@
 import fs from 'fs';
 import mongoose from 'mongoose';
-import { insertLevel, listLevel, insertTest } from './database/utils.js';
+import { insertLevel } from './database/utils.js';
 import  { connectDb } from './models/index.js';
 
 class Seed {
     constructor() {
         const tmp = fs.readFileSync('src/database/level.json', 'utf8');
-        const tmp2 = fs.readFileSync('src/database/test.json', 'utf8');
         this.levels = JSON.parse(tmp);
-        this.tests = JSON.parse(tmp2);
         connectDb();
     }
 
@@ -17,14 +15,6 @@ class Seed {
             console.log(level);
             insertLevel(level);
         });
-    }
-
-    async insertTests() {
-        const levels = await listLevel();
-        for (let i = 0; i < levels.length; i++) {
-            console.log(this.tests[i].argument, this.tests[i].expectedResult);
-            insertTest(levels[i]._id, this.tests[i]);
-        }
     }
 
     async resetDb() {
@@ -39,7 +29,6 @@ class Seed {
         connectDb()
             .then(this.resetDb()
                 .then(this.insertLevels()
-                    .then(this.insertTests())
                 ));
     }
 }

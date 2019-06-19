@@ -1,6 +1,7 @@
 import { observable,
     runInAction,
     action,
+    toJS,
 } from 'mobx';
 
 
@@ -12,8 +13,9 @@ class AppStore {
     @observable code = '';
     @observable save = [];
 
-    constructor(api) {
+    constructor(api, sand) {
         this.Api = api;
+        this.sandbox = sand;
     }
 
     fetchLevels = async () => {
@@ -28,7 +30,26 @@ class AppStore {
     initCode() {
         this.code = `box.${this.levels[this.level].name} = function ${this.levels[this.level].name} (x) {
 // ${this.levels[this.level].description}
+
 };`;
+    }
+
+    @action.bound
+    testCode() {
+        if (this.parser.length === 0) {
+
+            console.log('exec code');
+            console.log(this.levels[this.level].tests[0].arguments);
+            this.sandbox.PostMessage(toJS(this.code), toJS(this.levels[this.level].name), toJS(this.levels[this.level].tests[0].arguments));
+            this.sandbox.worker.addEventListener('message', (e) => {
+                console.log(e.data);
+                //     this.props.store.skipLevel();
+                this.sandbox.worker.terminate();
+            });
+        }
+        else {
+            console.log(toJS(this.parser));
+        }
     }
 
     @action.bound

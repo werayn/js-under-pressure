@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { levelSchema } from './levels';
-import { testSchema } from './tests';
 
 dotenv.config({ path: './.env' });
 
@@ -32,8 +31,7 @@ const disconnectDb = () => {
 };
 
 const Level = mongoose.model('Level', levelSchema, 'levels');
-const Test = mongoose.model('Test', testSchema);
 
-const models = { Level, Test };
+const models = { Level };
 
 export { connectDb, disconnectDb, models };

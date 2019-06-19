@@ -42,9 +42,7 @@ class Editor extends React.Component {
     }
 
     handleOnValidate(res) {
-        if (res.length > 0) {
-            this.props.store.pushError(res);
-        }
+        this.props.store.pushError(res);
     }
 
     render() {

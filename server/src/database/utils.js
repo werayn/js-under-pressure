@@ -1,11 +1,10 @@
-import { testSchema } from '../models/tests.js';
 import { models } from '../models/index.js';
 
 const insertLevel = (level) => {
     const Level = models.Level();
     Level.name = level.name;
     Level.description = level.description;
-    Level.test = null;
+    Level.tests = level.tests;
 
     Level.save((err) => {
         if (err) {
@@ -15,7 +14,7 @@ const insertLevel = (level) => {
     });
 };
 
-
+/*
 const insertTest = (LevelId, testTmp) => {
     models.Level.findOne({_id: LevelId}, (err, level) => {
         if (err) {
@@ -34,10 +33,10 @@ const insertTest = (LevelId, testTmp) => {
         });
     });
 };
-
+*/
 const listLevel = () => {
     return models.Level.find();
 };
 
 
-export { insertLevel, insertTest, listLevel };
+export { insertLevel, listLevel };

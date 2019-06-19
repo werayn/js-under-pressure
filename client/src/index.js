@@ -4,9 +4,11 @@ import { Provider } from 'mobx-react';
 import { App } from 'containers/app.jsx';
 import { Api } from 'network/api.js';
 import { AppStore } from 'store/index.js';
+import { sandBox } from './sandbox/index.js';
 
 const api = new Api();
-const store = new AppStore(api);
+const sand = new sandBox();
+const store = new AppStore(api, sand);
 /**
  * DOM component - setup main component into root div
  * @reactProps {none} none - none

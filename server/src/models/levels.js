@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { testSchema } from './tests.js';
 
 const levelSchema = new mongoose.Schema({
 
@@ -11,7 +10,10 @@ const levelSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    test : testSchema,
+    tests : {
+        type: [ 'Mixed '],
+        unique: true,
+    },
 });
 
 export { levelSchema };

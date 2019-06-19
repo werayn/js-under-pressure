@@ -43,8 +43,8 @@ class LevelsController {
         const id = req.params.id;
         models.Level.findById(id)
             .then((level) => {
-                (level.test) ?
-                    res.send(level.test) :
+                (level.tests) ?
+                    res.send(level.tests) :
                     next(new TestNotFound(id));
             });
     }

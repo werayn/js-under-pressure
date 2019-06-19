@@ -2,29 +2,84 @@
     {
         'name': 'square',
         'description': 'return x squared',
+        'tests' : [
+            { 'arguments' :  2,   'expectedResult' : 4    },
+            { 'arguments' :  4,   'expectedResult' : 16   },
+            { 'arguments' :  1.5, 'expectedResult' : 2.25 },
+            { 'arguments' : -12,  'expectedResult' : 144  },
+            { 'arguments' : -1.5, 'expectedResult' : 2.25 },
+        ],
     },
     {
         'name': 'invertCase',
         'description': 'x is a string. turn lowercase letters to uppercase and vice versa.',
+        'tests' : [
+            { 'arguments' : 'funkey monkey', 'expectedResult' : 'FUNKEY MONKEY' },
+            { 'arguments' : 'MONKEY MAGIC',  'expectedResult' : 'monkey magic' },
+            { 'arguments' : 'FlIrPyDuck',    'expectedResult' : 'fLiRpYdUCK' },
+            { 'arguments' : '', 'expectedResult' : '' },
+        ],
     },
     {
         'name': 'sumDigits',
         'description': 'sum the digits of the number x',
+        'tests' : [
+            { 'arguments' : 2,     'expectedResult' : 2  },
+            { 'arguments' : 412,   'expectedResult' : 7  },
+            { 'arguments' : 8.19,  'expectedResult' : 18 },
+            { 'arguments' : 4.12,  'expectedResult' : 7  },
+            { 'arguments' : 0,     'expectedResult' : 0  },
+            { 'arguments' : -14,   'expectedResult' : 5  },
+            { 'arguments' : -1.4,  'expectedResult' : 5  },
+        ],
     },
     {
         'name': 'flatten',
         'description': 'x is an arbitrarily nested, multidimensional array. return x flattened (all items in 1 dimension)',
+        'tests' : [
+            { 'arguments' : [], 'expectedResult' : [] },
+            { 'arguments' : [0, 1, 2], 'expectedResult' : [0, 1, 2] },
+            { 'arguments' : [[], 0, [1]], 'expectedResult' : [0, 1] },
+            {
+                'arguments'  : [0, [[[[[1, [2]]]]], 3], [4, [5]]],
+                'expectedResult' : [0, 1, 2, 3, 4, 5],
+            },
+        ],
     },
     {
         'name': 'isBalanced',
         'description': 'x is a string. return whether its parentheses are balanced that is, whether every opening ( has a closing )',
+        'tests' : [
+            { 'param' : '', 'result' : true },
+            { 'param' : '(', 'result' : false },
+            { 'param' : '()', 'result' : true },
+            { 'param' : '(1)', 'result' : true },
+            { 'param' : ')(', 'result' : false },
+            { 'param' : '())(()', 'result' : false },
+            { 'param' : '((a()b)c(l(pnq))())', 'result' : true },
+            { 'param' : '((a()b)c(l(pnq))()', 'result' : false },
+        ],
     },
     {
         'name': 'hasBalancePoint',
         'description': 'x is an array of numbers. return whether there is an index where the sum before (excluding) it is equal to the sum after (including) it.',
+        'tests' : [
+            { 'arguments' : [],  'expectedResult' : true },
+            { 'arguments' : [0], 'expectedResult' : true },
+            { 'arguments' : [42, 6, 19, 11, 11, 7], 'expectedResult' : true },
+            { 'arguments' : [1, 2], 'expectedResult' : false },
+        ],
     },
     {
         'name': 'mode',
         'description': 'x is an array of at least 1 item. return the most frequent item (there won"t be collisions)',
+        'tests' : [
+            { 'arguments' : [0], 'expectedResult' : 0 },
+            { 'arguments' : [0, 1, 1, 2], 'expectedResult' : 1 },
+            {
+                'arguments'  : [{}, 0, [1], 'foo', true, false, null, true],
+                'expectedResult' : true,
+            },
+        ],
     },
 ];
