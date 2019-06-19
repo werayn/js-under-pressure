@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react';
-import { MainEditor } from './main-editor.jsx';
-import { LogScreen } from './logger/log-screen.jsx';
+import { inject, observer } from 'mobx-react';
+import { Result } from './result/index.jsx';
+import { MainPanel } from './mainPanel.jsx';
 import 'styles/index.scss';
-import { observer } from 'mobx-react';
 
 @inject('store')
 @observer
@@ -21,8 +20,18 @@ class App extends React.Component {
     }
 
     handleEnterQ(e) {
-        if (e.keyCode === 13 && e.ctrlKey && this.props.store.start === 0) {
-            this.props.store.startEndTest();
+        if (e.keyCode === 13 && e.ctrlKey) {
+            switch (this.props.store.start) {
+            case 1 :
+                this.props.store.testCode();
+                break;
+            case 0 :
+                this.props.store.startTest();
+                break;
+            default :
+                console.log('do nothing');
+                break;
+            }
         }
 
         if (e.keyCode === 81 && e.ctrlKey) {
@@ -31,7 +40,7 @@ class App extends React.Component {
                 this.props.store.skipLevel();
                 console.log('skip level');
                 break;
-            case 2 :
+            case -1 :
                 // do nothing or maybe go back
                 console.log('result page');
                 break;
@@ -55,10 +64,9 @@ class App extends React.Component {
     render () {
 
         return (
-            <div className="container-fluid">
-                <MainEditor />
-                <LogScreen />
-            </div>
+            (this.props.store.start >= 0) ?
+                <MainPanel /> :
+                <Result />
         );
     }
 }
