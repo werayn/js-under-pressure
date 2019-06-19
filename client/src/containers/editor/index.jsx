@@ -6,9 +6,10 @@ import { EnterButton } from '../../components/EnterButton.jsx';
 import { Timer } from '../../components/timer.jsx';
 import WebWorker from '../../sandbox/webWorker.js';
 import customWorker from '../../sandbox/myWorker.js';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { toJS } from 'mobx';
+import _ from 'lodash';
 
 const markers = [
     {
@@ -19,11 +20,11 @@ const markers = [
 ];
 
 @inject('store')
-@observer
 class Editor extends React.Component {
 
     static propTypes = {
         store: PropTypes.any.isRequired,
+        level: PropTypes.any.isRequired,
     };
 
     constructor(props) {
@@ -31,40 +32,40 @@ class Editor extends React.Component {
         this.state = {
             value: '',
             valid: false,
-            levels: toJS(this.props.store.levels),
+            level: toJS(this.props.level),
         };
         this.handleOnLoad = this.handleOnLoad.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSelectionChange = this.handleOnSelectionChange.bind(this);
         this.handleOnCursorChange = this.handleOnCursorChange.bind(this);
         this.handleOnValidate = this.handleOnValidate.bind(this);
-        this.buildValue = this.buildValue.bind(this);
         this.Exec = this.Exec.bind(this);
     }
 
-    buildValue(i) {
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(toJS(nextProps.level));
+        console.log(nextState.level);
+        if (!_.isEqual(this.state.level, toJS(nextProps.level))) {
+            console.log('this update pd');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    handleOnLoad() {
+        console.log('on load');
         this.setState({
-            value:`box.${this.state.levels[i].name} = function ${this.state.levels[i].name} (x) {
-// ${this.state.levels[i].description}
+            value:`box.${this.state.level.name} = function ${this.state.level.name} (x) {
+// ${this.state.level.description}
 };`,
         });
     }
 
-    handleOnLoad() {
-        this.buildValue(this.props.store.level);
-    }
-
     handleOnChange(newValue) {
-        if (this.props.store.skip) {
-            this.setState({
-                value: this.buildValue(this.props.store.level),
-            });
-        }
-        else {
-            this.setState({
-                value: newValue,
-            });
-        }
+        this.setState({
+            value: newValue,
+        });
     }
 
     handleOnSelectionChange() {
@@ -93,6 +94,7 @@ class Editor extends React.Component {
         } = this.state;
 
         if (valid) {
+            console.log('valide');
             const worker = new WebWorker(customWorker);
             worker.postMessage({
                 code: value,
@@ -100,6 +102,7 @@ class Editor extends React.Component {
             });
             worker.addEventListener('message', (e) => {
                 console.log(e.data);
+                //     this.props.store.skipLevel();
             });
         }
         else {

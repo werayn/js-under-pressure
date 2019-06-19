@@ -29,7 +29,6 @@ class App extends React.Component {
             switch (this.props.store.start) {
             case 1 :
                 this.props.store.skipLevel();
-                this.props.store.detectSkip();
                 console.log('skip level');
                 break;
             case 2 :

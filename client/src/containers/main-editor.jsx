@@ -21,9 +21,10 @@ class MainEditor extends React.Component {
     }
 
     render () {
+        console.log('main:', this.props.store.level);
         return (
-            (this.props.store.start) ?
-                <Editor /> :
+            (this.props.store.start === 1) ?
+                <Editor level={ this.props.store.levels[this.props.store.level] } /> :
                 <Welcome />
         );
     }

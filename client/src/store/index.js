@@ -34,7 +34,7 @@ class AppStore {
 
     @action.bound
     skipLevel() {
-        this.level = this.levels + 1;
+        this.level = this.level + 1;
     }
 }
 
