@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { toJS } from 'mobx';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
+import 'brace/ext/searchbox';
 //import { EnterButton } from '../../components/EnterButton.jsx';
 
 const markers = [

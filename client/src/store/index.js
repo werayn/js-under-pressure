@@ -3,6 +3,7 @@ import { observable,
     action,
     toJS,
 } from 'mobx';
+import { equal } from '../utils/equal.js';
 
 
 class AppStore {
@@ -12,6 +13,7 @@ class AppStore {
     @observable level = 0;
     @observable code = '';
     @observable save = [];
+    @observable match = false;
 
     constructor(api, sand) {
         this.Api = api;
@@ -37,17 +39,38 @@ class AppStore {
     @action.bound
     testCode() {
         if (this.parser.length === 0) {
-
             console.log('exec code');
-            console.log(this.levels[this.level].tests[0].arguments);
-            this.sandbox.PostMessage(toJS(this.code), toJS(this.levels[this.level].name), toJS(this.levels[this.level].tests[0].arguments));
-            this.sandbox.worker.addEventListener('message', (e) => {
-                console.log(e.data);
-                //     this.props.store.skipLevel();
-                this.sandbox.worker.terminate();
+            const toto = this.levels[this.level].tests.map( async test => {
+                this.sandbox.createWorker();
+                this.sandbox.PostMessage(toJS(this.code), toJS(this.levels[this.level].name), toJS(test.arguments));
+                this.sandbox.worker.addEventListener('message', async (e) => {
+                    if (equal(test.expectedResult === e.data.result)) {
+                        console.log('nice');
+                        this.sandbox.stopWorker();
+                        this.match = true;
+                        return await true;
+                        //send to logger nice
+                    }
+                    else {
+                        //send to logger bad
+                        this.match = false;
+                        console.log('bad result');
+                        //  this.sandbox.stopWorker();
+                        return await false;
+                    }
+                    //     this.props.store.skipLevel();
+                });
+
             });
+            console.log(toto);
+            if (this.match) {
+                console.log('next level');
+                this.save.push(this.code);
+                this.skipLevel();
+            }
         }
         else {
+            //send to logger error
             console.log(toJS(this.parser));
         }
     }
@@ -74,8 +97,13 @@ class AppStore {
 
     @action.bound
     skipLevel() {
-        this.level = this.level + 1;
-        this.initCode();
+        if (this.levels.length - 1 === this.level) {
+            this.endTest();
+        }
+        else {
+            this.level = this.level + 1;
+            this.initCode();
+        }
     }
 }
 

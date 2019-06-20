@@ -2,11 +2,15 @@ import WebWorker from './webWorker';
 import customWorker from './myWorker';
 
 class sandBox {
+    constructor() {
+        this.worker = null;
+    }
+
     createWorker() {
         this.worker = new WebWorker(customWorker);
     }
 
-    closeWorker() {
+    stopWorker() {
         this.worker.terminate();
     }
 
