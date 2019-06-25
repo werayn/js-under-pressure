@@ -64,9 +64,13 @@ class App extends React.Component {
     render () {
 
         return (
-            (this.props.store.start >= 0) ?
-                <MainPanel /> :
-                <Result />
+            <div className="row">
+                {
+                    this.props.store.start >= 0 ?
+                        <MainPanel /> :
+                        <Result />
+                }
+            </div>
         );
     }
 }
