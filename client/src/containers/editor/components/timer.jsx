@@ -17,7 +17,7 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: '',
+            time: '00.000',
             start: this.props.start,
         };
         this.timer = null;
@@ -26,7 +26,7 @@ class Timer extends React.Component {
     }
 
     componentDidMount() {
-        this.timer = setInterval(this.tick, 1000);
+        this.timer = setInterval(this.tick, 99);
     }
 
     componentWillUnmount() {
@@ -35,22 +35,31 @@ class Timer extends React.Component {
 
     timerBuilder() {
         const { start } = this.state;
-        const ms = (new Date() - start);
-        const elapsed = Math.round(ms / 100);
-        let seconds = (elapsed / 10 ).toFixed(1);
-
-        const min = Math.floor(seconds / 60);
-        const hour = Math.floor(min / 60);
+        const end = new Date();
+        const diff = new Date(end - start);
+        let msec = diff.getMilliseconds();
+        let sec = diff.getSeconds();
+        let min = diff.getMinutes();
+        const hr = diff.getHours() - 1;
+        if (min < 10){
+            min = '0' + min;
+        }
+        if (sec < 10){
+            sec = '0' + sec;
+        }
+        if (msec < 10){
+            msec = '00' + msec;
+        }
+        else if (msec < 100){
+            msec = '0' + msec;
+        }
         switch (true) {
-        case seconds > 3600:
-            seconds = seconds % 60;
-            return `${hour} : ${min} : ${seconds}`;
-        case seconds > 60 :
-            seconds = seconds % 60;
-            return `${min} : ${seconds}`;
+        case hr > 0:
+            return `${hr} : ${min} : ${sec}.${msec}`;
+        case min > 0 :
+            return `${min} : ${sec}.${msec}`;
         default :
-            return `${seconds}`;
-
+            return `${sec}.${msec}`;
         }
     }
 

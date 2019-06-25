@@ -23,7 +23,7 @@ class App extends React.Component {
         if (e.keyCode === 13 && e.ctrlKey) {
             switch (this.props.store.start) {
             case 1 :
-                this.props.store.testCode();
+                this.props.store.handleTestCode();
                 break;
             case 0 :
                 this.props.store.startTest();

@@ -6,6 +6,7 @@ import {
 } from 'mobx-react';
 import { Editor } from './components/aceEditor.jsx';
 import { Timer } from './components/timer.jsx';
+import { EnterButton } from './components/EnterButton.jsx';
 
 
 @inject('store')
@@ -18,6 +19,9 @@ class MainEditor extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            time: Date.now(),
+        };
     }
 
     render () {
@@ -25,7 +29,8 @@ class MainEditor extends React.Component {
             <div className="row">
                 <Editor />
                 <div className="col-md-2 ">
-                    <Timer start={ Date.now() } />
+                    <Timer start={ this.state.time } />
+                    <EnterButton />
                 </div>
             </div>
         );

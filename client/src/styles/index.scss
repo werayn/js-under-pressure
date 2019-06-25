@@ -42,6 +42,12 @@ p {
     background-color: red;
 }
 
+.EnterButton {
+    position: absolute;
+    top: 40%;
+    margin: 0;
+}
+
 .log {
     position: absolute;
     top: 70%;
@@ -60,8 +66,4 @@ p {
 
 .log-line {
     padding: 4px;
-}
-
-.Button {
-    padding-left: 7%;
 }

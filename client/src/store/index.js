@@ -37,7 +37,7 @@ class AppStore {
     }
 
     @action.bound
-    testCode() {
+    handleTestCode() {
         if (this.parser.length === 0) {
             console.log('exec code');
             const toto = this.levels[this.level].tests.map( async test => {
