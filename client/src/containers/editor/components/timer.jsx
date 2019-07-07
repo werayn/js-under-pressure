@@ -5,7 +5,6 @@ import {
     observer,
 } from 'mobx-react';
 
-
 @inject('store')
 @observer
 class Timer extends React.Component {
@@ -37,7 +36,7 @@ class Timer extends React.Component {
         const { start } = this.state;
         const end = new Date();
         const diff = new Date(end - start);
-        let msec = diff.getMilliseconds();
+        const msec = Math.round(diff.getMilliseconds() / 100);
         let sec = diff.getSeconds();
         let min = diff.getMinutes();
         const hr = diff.getHours() - 1;
@@ -46,12 +45,6 @@ class Timer extends React.Component {
         }
         if (sec < 10){
             sec = '0' + sec;
-        }
-        if (msec < 10){
-            msec = '00' + msec;
-        }
-        else if (msec < 100){
-            msec = '0' + msec;
         }
         switch (true) {
         case hr > 0:

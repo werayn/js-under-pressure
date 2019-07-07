@@ -19,7 +19,8 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-jest": "^22.6.4",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

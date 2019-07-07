@@ -26,16 +26,8 @@ class Editor extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            value: '',
-        };
-        this.handleOnLoad = this.handleOnLoad.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnValidate = this.handleOnValidate.bind(this);
-    }
-
-    handleOnLoad() {
-        this.props.store.initCode();
     }
 
     handleOnChange(newValue) {
@@ -57,7 +49,6 @@ class Editor extends React.Component {
                     mode="javascript"
                     theme="monokai"
                     name="blah2"
-                    onLoad={ this.handleOnLoad }
                     onChange={ this.handleOnChange }
                     onValidate={ this.handleOnValidate }
                     value={ toJS(this.props.store.code) }

@@ -45,8 +45,7 @@ class App extends React.Component {
                 console.log('result page');
                 break;
             default :
-            // send logger you cant skip
-                console.log('you cant skip now');
+                this.props.store.addLine('You can\'t skip level now...');
                 break;
             }
         }
@@ -54,6 +53,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        this.props.store.addLine('Ctrl+Enter or ⌘+Enter to submit/continue, (Ctrl/⌘)+Q to skip a level, (Ctrl/⌘)+R to restart a level.');
+        this.props.store.addLine('Loading levels...');
         document.addEventListener('keydown', this.handleEnterQ);
     }
 
@@ -62,7 +63,6 @@ class App extends React.Component {
     }
 
     render () {
-
         return (
             <div className="row">
                 {

@@ -2,6 +2,7 @@ import { observable,
     runInAction,
     action,
     toJS,
+    observe,
 } from 'mobx';
 import { equal } from '../utils/equal.js';
 
@@ -14,6 +15,7 @@ class AppStore {
     @observable code = '';
     @observable save = [];
     @observable match = false;
+    @observable log = [];
 
     constructor(api, sand) {
         this.Api = api;
@@ -25,8 +27,19 @@ class AppStore {
 
         runInAction(() => {
             this.levels = levels;
+            this.addLine('Finished loading levels. Proceed.');
+        });
+        this.ScrollDisposer();
+    }
+
+    ScrollDisposer() {
+        observe(this.log, (change) => {
+            const textLog = document.getElementById('textlog');
+            textLog.scrollTop = textLog.scrollHeight;
+            console.log('aeazeazezzaee');
         });
     }
+
 
     @action.bound
     initCode() {
@@ -37,18 +50,17 @@ class AppStore {
     }
 
     @action.bound
-    handleTestCode() {
+    async handleTestCode() {
         if (this.parser.length === 0) {
             console.log('exec code');
-            const toto = this.levels[this.level].tests.map( async test => {
+            const toto = await this.levels[this.level].tests.map( test => {
                 this.sandbox.createWorker();
                 this.sandbox.PostMessage(toJS(this.code), toJS(this.levels[this.level].name), toJS(test.arguments));
-                this.sandbox.worker.addEventListener('message', async (e) => {
+                this.sandbox.worker.addEventListener('message', (e) => {
                     if (equal(test.expectedResult === e.data.result)) {
                         console.log('nice');
                         this.sandbox.stopWorker();
                         this.match = true;
-                        return await true;
                         //send to logger nice
                     }
                     else {
@@ -56,13 +68,12 @@ class AppStore {
                         this.match = false;
                         console.log('bad result');
                         //  this.sandbox.stopWorker();
-                        return await false;
                     }
                     //     this.props.store.skipLevel();
                 });
 
             });
-            console.log(toto);
+            console.log(this.match);
             if (this.match) {
                 console.log('next level');
                 this.save.push(this.code);
@@ -88,6 +99,7 @@ class AppStore {
     @action.bound
     startTest() {
         this.start = 1;
+        this.initCode();
     }
 
     @action.bound
@@ -105,33 +117,24 @@ class AppStore {
             this.initCode();
         }
     }
-}
 
-/*
-   Exec(event) {
-        const {
-            value,
-            valid,
-        } = this.state;
-
-        if (valid) {
-            console.log('valide');
-            const worker = new WebWorker(customWorker);
-            worker.postMessage({
-                code: value,
-                name: 'square',
-            });
-            worker.addEventListener('message', (e) => {
-                console.log(e.data);
-                //     this.props.store.skipLevel();
-            });
-        }
-        else {
-            // call mobx action to edit log
-            console.log('nop pas valide');
-        }
+    @action.bound
+    addLine(val, styl) {
+        const obj = {
+            content: val,
+            style: styl || '',
+        };
+        this.log.push(obj);
+        const textLog = document.getElementById('textlog');
+        textLog.scrollTop = textLog.scrollHeight;
 
     }
-*/
+
+    @action.bound
+    cleanLog() {
+        this.log = [];
+    }
+
+}
 
 export { AppStore };
