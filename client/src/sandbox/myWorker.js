@@ -8,6 +8,7 @@ export default function customWorker() {
         const code = event.data.code;
         const name = event.data.name;
         const arg = event.data.arguments;
+        const expected = event.data.expected;
         let result;
         try {
             // eslint-disable-next-line no-new-func
@@ -20,6 +21,12 @@ export default function customWorker() {
             postMessage( e.toString() );
             return;
         }
-        postMessage({result: result});
+        postMessage(
+            {
+                result: result,
+                expectedResult: expected,
+                name: name,
+                arg: arg,
+            });
     };
 }

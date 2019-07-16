@@ -4,7 +4,7 @@ import { observable,
     toJS,
     observe,
 } from 'mobx';
-import { equal } from '../utils/equal.js';
+import { equality } from '../utils/equal.js';
 
 
 class AppStore {
@@ -14,7 +14,6 @@ class AppStore {
     @observable level = 0;
     @observable code = '';
     @observable save = [];
-    @observable match = false;
     @observable log = [];
 
     constructor(api, sand) {
@@ -36,10 +35,8 @@ class AppStore {
         observe(this.log, (change) => {
             const textLog = document.getElementById('textlog');
             textLog.scrollTop = textLog.scrollHeight;
-            console.log('aeazeazezzaee');
         });
     }
-
 
     @action.bound
     initCode() {
@@ -52,37 +49,34 @@ class AppStore {
     @action.bound
     async handleTestCode() {
         if (this.parser.length === 0) {
-            console.log('exec code');
-            const toto = await this.levels[this.level].tests.map( test => {
-                this.sandbox.createWorker();
-                this.sandbox.PostMessage(toJS(this.code), toJS(this.levels[this.level].name), toJS(test.arguments));
-                this.sandbox.worker.addEventListener('message', (e) => {
-                    if (equal(test.expectedResult === e.data.result)) {
-                        console.log('nice');
-                        this.sandbox.stopWorker();
-                        this.match = true;
-                        //send to logger nice
-                    }
-                    else {
-                        //send to logger bad
-                        this.match = false;
-                        console.log('bad result');
-                        //  this.sandbox.stopWorker();
-                    }
-                    //     this.props.store.skipLevel();
-                });
-
-            });
-            console.log(this.match);
-            if (this.match) {
-                console.log('next level');
-                this.save.push(this.code);
-                this.skipLevel();
-            }
+            this.addLine('Testing in progress...');
+            const tested = await this.sandbox.execTests(toJS(this.code),
+                toJS(this.levels[this.level].tests),
+                toJS(this.levels[this.level].name));
+            this.checkValidity(tested);
         }
         else {
-            //send to logger error
+            const parser = toJS(this.parser);
+            parser.map(err => {
+                this.addLine(`at line: ${err.row} ${err.text}`);
+            });
             console.log(toJS(this.parser));
+        }
+    }
+
+    checkValidity(tested) {
+        let validity = true;
+        tested.map(test => {
+            if (equality(test.result, test.expectedResult)) {
+                this.addLine(`${test.name}(${test.arg}) = ${test.expectedResult}`);
+            }
+            else {
+                validity = false;
+                this.addLine(`${test.name}(${test.arg}) expected ${test.expectedResult} got ${test.result}`);
+            }
+        });
+        if (validity) {
+            this.skipLevel();
         }
     }
 
@@ -135,6 +129,11 @@ class AppStore {
         this.log = [];
     }
 
+    @action.bound
+    addLineError(tested, style) {
+        this.addLine(tested.ret, tested.expected, style);
+
+    }
 }
 
 export { AppStore };

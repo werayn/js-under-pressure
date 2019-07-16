@@ -1,4 +1,4 @@
-function equal (left, right) {
+function equality (left, right) {
     if (left === right || Object(left) === Object(right)) {
         return true;
     }
@@ -7,10 +7,10 @@ function equal (left, right) {
             return false;
         }
         return left.every(function testArrayItemEquality (item, idx) {
-            return equal(item, right[idx]);
+            return equality(item, right[idx]);
         });
     }
     return false;
 }
 
-export { equal };
+export { equality };
